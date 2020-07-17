@@ -29,7 +29,7 @@ const createUser = async (req, res, shopId) => {
 const createShop = async (req, res) => {
   try {
     const shop = {
-      name: req.body.name,
+      name: req.body.nameShop,
     };
     const data = await Shop.create(shop);
     res.send({ status: 'success', data });
@@ -119,6 +119,8 @@ exports.getAllBussiness = (req, res) => {
     });
 };
 exports.createBussinessAdmin = async (req, res) => {
+  console.log('abc');
+  console.log(req.body);
   let shopId = await createShop(req, res);
   createUser(req, res, shopId);
 };

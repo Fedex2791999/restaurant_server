@@ -1,24 +1,31 @@
 module.exports = (sequelize, DataTypes) => {
-  const Feedback = sequelize.define('feedback', {
-    id: {
-      type: DataTypes.SMALLINT.UNSIGNED,
-      primaryKey: true,
-      autoIncrement: true,
+  const Feedback = sequelize.define(
+    'feedback',
+    {
+      id: {
+        type: DataTypes.SMALLINT.UNSIGNED,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      comment: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      updatedAt: {
+        type: 'TIMESTAMP',
+        defaultValue: DataTypes.literal('CURRENT_TIMESTAMP').UNSIGNED,
+        allowNull: false,
+      },
+      createdAt: {
+        type: 'TIMESTAMP',
+        defaultValue: DataTypes.literal('CURRENT_TIMESTAMP'),
+        allowNull: false,
+      },
     },
-    comment: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    updatedAt: {
-      type: 'TIMESTAMP',
-      defaultValue: DataTypes.literal('CURRENT_TIMESTAMP').UNSIGNED,
-      allowNull: false,
-    },
-    createdAt: {
-      type: 'TIMESTAMP',
-      defaultValue: DataTypes.literal('CURRENT_TIMESTAMP'),
-      allowNull: false,
-    },
-  });
+    {
+      charset: 'utf8',
+      collate: 'utf8_unicode_ci',
+    }
+  );
   return Feedback;
 };

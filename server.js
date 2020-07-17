@@ -2,12 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 //* Routes import
 const authApi = require('./routes/auth/auth');
-const bussinessApi = require('./routes/services/bussiness');
 const userApi = require('./routes/auth/user');
+const bussinessApi = require('./routes/services/bussiness');
+const orderApi = require('./routes/services/order');
+const paymentApi = require('./routes/services/payment');
+
 const cors = require('cors');
 const app = express();
 const corsOptions = {
-  origin: 'http://localhost:8080',
+  origin: 'http://localhost:3000',
 };
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
@@ -43,6 +46,8 @@ db.sequelize.sync({ force: false }).then(() => {
 app.use('/api/auth', authApi);
 app.use('/api/bussiness', bussinessApi);
 app.use('/api/test/', userApi);
+app.use ('/api/order', orderApi)
+app.use ('/api/payment', paymentApi)
 
 app.get('/', (req, res) => {
   // console.log(req);

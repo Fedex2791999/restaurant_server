@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      rememberPass: {
+        type: DataTypes.TINYINT(1),
+        defaultValue: 0,
+      },
       updatedAt: {
         type: 'TIMESTAMP',
         defaultValue: DataTypes.literal('CURRENT_TIMESTAMP').UNSIGNED,
@@ -36,6 +40,8 @@ module.exports = (sequelize, DataTypes) => {
           fields: ['shopId'],
         },
       ],
+      charset: 'utf8',
+      collate: 'utf8_unicode_ci',
     }
   );
 

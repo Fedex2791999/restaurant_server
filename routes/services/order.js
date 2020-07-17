@@ -1,10 +1,12 @@
 const express = require('express');
-const { verify,auth } = require('../../middlewares');
+const { verify, auth } = require('../../middlewares');
 const controller = require('../../controllers/services/orderController');
 const router = express.Router();
-router.post(
-  '/booking', [auth.verifyToken],
-  controller.BookingTable
-);
-
+router.post('/booking', [auth.verifyToken], controller.BookingTable);
+router.post('/', [auth.verifyToken], controller.createOrder);
+router.put('/', [auth.verifyToken], controller.updateOrder);
+router.delete('/', [auth.verifyToken], controller.deleteOrder);
+router.post('/detail', [], controller.createOrderDetail);
+router.put('/detail', [], controller.updateOrderDetail);
+router.delete('/detail', [], controller.deleteOrderDetail);
 module.exports = router;
