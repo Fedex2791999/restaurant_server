@@ -11,10 +11,22 @@ router.post(
 );
 router.post(
   '/category/',
-  [auth.verifyToken, verify.checkShopExisted],
+  [auth.verifyToken],
   controller.createCategory
 );
+router.put(
+  '/category/',
+  [auth.verifyToken, verify.checkShopExisted],
+  controller.updateCategory
+);
+router.delete(
+  '/category/:id',
+  [auth.verifyToken, verify.checkShopExisted],
+  controller.deleteCategory
+);
 router.get('/category/', [auth.verifyToken], controller.getAllCategory);
+router.get('/testFilterDate/', controller.testFilterDate);
+
 router.get(
   '/category/:categoryId',
   [auth.verifyToken],

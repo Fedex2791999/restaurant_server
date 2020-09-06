@@ -134,7 +134,9 @@ exports.updateOrderDetail = async (req, res) => {
       orderId: req.body.orderId,
       itemId: req.body.itemId,
     };
-    const data = await OrderDetail.update(orderDetail, { where: { id: req.body.id } });
+    const data = await OrderDetail.update(orderDetail, {
+      where: { id: req.body.id },
+    });
     const result = await OrderDetail.findByPk(req.body.id);
     if (data[0] == 1) {
       res.status(200).send({ status: 'Success', result });
@@ -162,6 +164,34 @@ exports.deleteOrderDetail = async (req, res) => {
     res.status(500).send({
       message: err.message,
       err: 'Lỗi rồi',
+    });
+  }
+};
+
+exports.getOrder = async (req, res) => {
+  try {
+    const data = await Order.findAll({ include: ['orderdetails'] });
+    res.status(200).send({ status: 'successs', data });
+  } catch (err) {
+    res.status(500).send({
+      status: 'failed',
+      message: err.message,
+    });
+  }
+};
+
+exports.getListOrder = async (req, res) => {
+  try {
+    const data = await OrderDetail.findAll({
+      where: {
+        orderId: req.params.id,
+      },
+    });
+    res.status(200).send({ status: 'successs', data });
+  } catch (err) {
+    res.status(500).send({
+      status: 'failed',
+      message: err.message,
     });
   }
 };

@@ -9,14 +9,13 @@ verifyToken = (req, res, next) => {
       message: 'No token provided!',
     });
   }
-
   jwt.verify(token, config.secret, (err, decoded) => {
     if (err) {
       return res.status(401).send({
         message: 'Unauthorized!',
         err: 'Token hình như bị sai thì phải',
       });
-    }    
+    }
     req.user = decoded;
     next(); // bắt buộc phai có callback
   });
@@ -79,7 +78,7 @@ isModeratorOrAdmin = (req, res, next) => {
   });
 };
 
-const auth= {
+const auth = {
   verifyToken: verifyToken,
   isAdmin: isAdmin,
   isModerator: isModerator,

@@ -62,14 +62,11 @@ exports.signin = async (req, res) => {
         message: 'Invalid Password',
       });
     }
-    const token = jwt.sign({ id: user.id }, config.secret, {
+
+    const token = jwt.sign({ id: user.id, shopId: user.shopId }, config.secret, {
       expiresIn: '1d',
     });
-    // let authorities = [];
-    // user.getRoles().then(roles => {
-    //   for (let i = 0; i < roles.length; i++) {
-    //     authorities.push('ROLE_' + roles[i].name.toUpperCase());
-    //   }
+  
     res.status(200).send({
       id: user.id,
       username: user.username,
